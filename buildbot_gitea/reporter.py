@@ -167,12 +167,10 @@ class GiteaStatusPush(http.ReporterBase):
             if sha is None:
                 # No special revision for this, so ignore it
                 continue
-            # If this is a pull request, send the status to the head repository
             if 'pr_id' in props:
-                repository_name = props['head_reponame']
-                repository_owner = props['head_owner']
                 sha = props['head_sha']
-            elif 'repository_name' in props:
+
+            if 'repository_name' in props:
                 repository_name = props['repository_name']
             else:
                 match = re.match(self.ssh_url_match, sourcestamp['repository'])

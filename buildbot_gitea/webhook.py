@@ -103,7 +103,7 @@ class GiteaHandler(BaseHookHandler):
             'revlink': pull_request['html_url'],
             'repository': base['repo']['ssh_url'],
             'project': repository['full_name'],
-            'category': event_type,
+            'category': "pull",
             'properties': {
                 'event': event_type,
                 'base_branch': base['ref'],

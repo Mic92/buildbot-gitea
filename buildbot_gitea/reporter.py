@@ -63,10 +63,13 @@ class GiteaStatusPush(http.ReporterBase):
         if baseURL.endswith('/'):
             baseURL = baseURL[:-1]
         self.baseURL = baseURL
-        self._http = yield httpclientservice.HTTPClientService.getService(
-            self.master, baseURL,
+        self._http = yield httpclientservice.HTTPSession(
+            self.master.httpservice,
+            baseURL,
             headers={'Authorization': 'token {}'.format(token)},
-            debug=self.debug, verify=self.verify)
+            debug=self.debug,
+            verify=self.verify
+        )
         self.verbose = verbose
         self.project_ids = {}
         self.warningAsSuccess = warningAsSuccess
